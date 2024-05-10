@@ -1,0 +1,4 @@
+.vscode/
+cypress/downloads/
+node_modules/
+.env

@@ -1,27 +1,12 @@
 import generatePerson from "./personModel";
-import "cypress-file-upload";
 
 const person = generatePerson();
 Cypress.Commands.add("nameAndEmailFillForm", (name, email) => {
-  cy.get('[data-qa="signup-name"]')
-    .type(name)
-    .should("have.value", `${name}`);
+  cy.get('[data-qa="signup-name"]').type(name).should("have.value", `${name}`);
   cy.get('[data-qa="signup-email"]')
     .type(email)
     .should("have.value", `${email}`);
   cy.get('[data-qa="signup-button"]').click();
-});
-
-Cypress.Commands.add("createAccountVerifyForm", () => {
-  cy.get('[class="login-form"]')
-    .find("label")
-    .then((nameField) => {
-      expect(nameField.text())
-        .to.be.contain("Title")
-        .and.contain(
-          "Name *Email *Password *Date of BirthSign up for our newsletter!Receive special offers from our partners!First name *Last name *CompanyAddress * (Street address, P.O. Box, Company name, etc.)Address 2Country * State * City * Zipcode * Mobile Number"
-        );
-    });
 });
 
 Cypress.Commands.add("createAccountFillForm", () => {
@@ -65,13 +50,29 @@ Cypress.Commands.add("createAccountFillForm", () => {
   cy.get('[data-qa="create-account"]').click();
 });
 
+Cypress.Commands.add("createAccountVerifyForm", () => {
+  cy.get('[class="login-form"]')
+    .find("label")
+    .then((nameField) => {
+      expect(nameField.text())
+        .to.be.contain("Title")
+        .and.contain(
+          "Name *Email *Password *Date of BirthSign up for our newsletter!Receive special offers from our partners!First name *Last name *CompanyAddress * (Street address, P.O. Box, Company name, etc.)Address 2Country * State * City * Zipcode * Mobile Number"
+        );
+    });
+});
+
 Cypress.Commands.add("confirmCreatedAccount", () => {
   cy.get('[data-qa="account-created"]').should("be.visible");
   cy.url().should("include", "/account_created");
-  cy.get('[data-qa="continue-button"]').click()
+  cy.get('[data-qa="continue-button"]').click();
 });
 
-Cypress.Commands.add('deleteAccount', () => {
-  cy.contains(' Delete Account').click();
-  cy.get('[data-qa="account-deleted"]').should('be.visible')
-})
+Cypress.Commands.add("deleteAccount", () => {
+  cy.contains(" Delete Account").click();
+  cy.get('[data-qa="account-deleted"]').should("be.visible");
+});
+
+Cypress.Commands.add("messageFailedSignup", () => {
+  cy.contains("Email Address already exist!").should("be.visible");
+});

@@ -1,37 +1,25 @@
 import generatePerson from "../support/personModel";
 
-describe("createAccount", () => {
-  const person = generatePerson();
-beforeEach( ()=> {
-  cy.visit('/signup')
-})
+describe("Create Account", () => {
+  it("Should register a new user", () => {
+    const person = generatePerson();
+    const personName = person.name;
+    const personEmail = person.email;
 
-
-  it("Should create a new user and delete after", () => {
-    cy.nameAndEmailFillForm(person.name, person.email);
+    cy.enterToLoginPage();
+    cy.nameAndEmailFillForm(personName, personEmail);
     cy.createAccountVerifyForm();
     cy.createAccountFillForm();
     cy.confirmCreatedAccount();
     cy.deleteAccount();
   });
 
-  it('Should fail to create a user with repeated email', () => {
-    cy.nameAndEmailFillForm('brunoqa', 'brunoqa1@gmail.com');
-    cy.contains('Email Address already exist!').should('be.visible')
+  it("Should fail register new user with existing email", () => {
+    const personName = "brunoqa";
+    const personEmail = "brunoqa1@gmail.com";
+
+    cy.enterToLoginPage();
+    cy.nameAndEmailFillForm(personName, personEmail);
+    cy.messageFailedSignup()
   });
-
-  it.skip('Should fail to create if the email is wrong format', () => {
-  })
-
-  it.skip('Should fail to create if name have 4 less words', () => {
-
-  })
-
-  it.skip('Should fail to create if the name is blank', () => {
-
-  })
-  
-  it.skip('Should fail to create if the email is blank', () => {
-    
-  })
 });

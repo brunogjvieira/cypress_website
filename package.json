@@ -15,7 +15,6 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "cypress-file-upload": "^5.0.8",
     "faker-br": "^0.4.1"
   }
 }

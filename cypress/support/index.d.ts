@@ -24,5 +24,18 @@ declare namespace Cypress {
     insertUploadArquiveJPG(): any;
     contactUsSubmitButton(): any;
     contactUsSuccessMessage(): any;
+    enterToTestCasesPage(): any;
+    verifyAllTestCasesPage(array: string[]): Chainable<void>;
+    enterToProductsPage(): any;
+    viewProductByIndex(indexProduct): any;
+    verifyDetailProduct(): any;
+    selectProductBySearch(nameProduct): any;
+    verifyQuantityProductsInThePage(quantityProduct): any;
+    sendSubscriptionInProductsPage(email): any;
+    enterToCartPage(): any;
+    sendSubscriptionInCartPage(email): any;
+    addProductInCart(index): any;
+    messageProductAddedToCart(boolean): any;
+    verifyItemFromCart(): any;
   }
 }

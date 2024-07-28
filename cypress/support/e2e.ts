@@ -19,5 +19,9 @@ import './personModel'
 import './loginCommands'
 import './contactUsCommands'
 import './utils'
+import './testCasesPageCommands'
+import './productsCommands'
+import './productDetailsCommands'
+import './cartCommands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

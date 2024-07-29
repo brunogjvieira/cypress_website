@@ -15,25 +15,22 @@ describe("login User", () => {
   beforeEach(() => {
     randomPerson = generatePerson();
   });
-  it("Should login User with correct email and password", () => {
+  it("Should Login User with Correct Email and Password", () => {
     cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
-    cy.loginAccountFillForm(users.bruno.email, users.bruno.password);
-    cy.confirmButtonLogin();
-    cy.verifyLogged(users.bruno.name);
+    cy.fillLoginForm(users.bruno.email, users.bruno.password);
+    cy.verifyUserIsLoggedIn(users.bruno.name);
   });
 
-  it("Should login User with incorrect email and password", () => {
+  it("Should Login User with Incorrect Email and Password", () => {
     cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
-    cy.loginAccountFillForm(randomPerson.email, randomPerson.password);
-    cy.confirmButtonLogin();
-    cy.messageFailedLogin();
+    cy.fillLoginForm(randomPerson.email, randomPerson.password);
+    cy.verifyFailedLoginMessage();
   });
 
-  it("Should login User with correct email and password after Logout", () => {
+  it("Should log in User and then log out", () => {
     cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
-    cy.loginAccountFillForm(users.bruno.email, users.bruno.password);
-    cy.confirmButtonLogin();
-    cy.clickLogoutButton();
-    cy.confirmLogout();
+    cy.fillLoginForm(users.bruno.email, users.bruno.password);
+    cy.logout();
+    cy.verifyLogoutSuccess();
   });
 });

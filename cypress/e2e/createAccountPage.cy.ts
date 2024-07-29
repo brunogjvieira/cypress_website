@@ -15,11 +15,11 @@ describe("Create Account", () => {
   beforeEach(() => {
     randomPerson = generatePerson();
   });
-  it("Should register a new user", () => {
+  it("Should Register a New User", () => {
     cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
-    cy.nameAndEmailFillForm(randomPerson.name, randomPerson.email);
-    cy.createAccountVerifyForm();
-    cy.createAccountFillForm(
+    cy.fillNameAndEmailForm(randomPerson.name, randomPerson.email);
+    cy.verifyAccountCreationForm();
+    cy.fillAccountCreationForm(
       randomPerson.password,
       randomPerson.name,
       randomPerson.lastName,
@@ -31,13 +31,13 @@ describe("Create Account", () => {
       randomPerson.zipcode,
       randomPerson.phoneNumber
     );
-    cy.confirmCreatedAccount();
+    cy.confirmAccountCreation();
     cy.deleteAccount();
   });
 
-  it("Should fail register new user with existing email", () => {
+  it("Should Fail to Register New User with Existing Email", () => {
     cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
-    cy.nameAndEmailFillForm(users.bruno.name, users.bruno.email);
-    cy.messageFailedSignup();
+    cy.fillNameAndEmailForm(users.bruno.name, users.bruno.email);
+    cy.verifySignupFailureMessage();
   });
 });

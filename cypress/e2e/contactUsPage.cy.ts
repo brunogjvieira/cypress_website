@@ -11,19 +11,19 @@ describe("Contact Us", () => {
   beforeEach(() => {
     randomPerson = generatePerson();
   });
-  it("Should Fill the Contact Us Form and submit", () => {
+  it("Should Fill the Contact Us Form and Submit", () => {
     cy.navigateToPage(
       pages.contactUsPage.name,
       pages.contactUsPage.pageLoadSelector
     );
-    cy.contactUsFillForm(
+    cy.fillContactUsForm(
       randomPerson.name,
       randomPerson.email,
       randomPerson.lorem,
       randomPerson.lorem
     );
     cy.insertUploadArquiveJPG();
-    cy.contactUsSubmitButton();
-    cy.contactUsSuccessMessage();
+    cy.submitContactUsForm();
+    cy.verifyContactUsSuccessMessage();
   });
 });

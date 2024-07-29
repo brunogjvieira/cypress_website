@@ -5,20 +5,20 @@ Cypress.Commands.add("viewProductByIndex", (indexProduct) => {
     .contains("View Product")
     .click();
 });
-Cypress.Commands.add("selectProductBySearch", (nameProduct) => {
+Cypress.Commands.add("searchProductByName", (nameProduct) => {
   cy.get("#search_product").type(nameProduct).should("have.value", nameProduct);
   cy.get("#submit_search").click();
   cy.contains("Searched Products").should("be.visible");
 });
 
-Cypress.Commands.add("verifyQuantityProductsInThePage", (quantityProduct) => {
+Cypress.Commands.add("verifyProductCountOnPage", (quantityProduct) => {
   cy.get('[class="product-image-wrapper"]').should(
     "have.length",
     quantityProduct
   );
 });
 
-Cypress.Commands.add("sendSubscriptionInProductsPage", (email) => {
+Cypress.Commands.add("sendSubscriptionOnProductsPage", (email) => {
   cy.get("#susbscribe_email")
     .scrollIntoView()
     .type(email)
@@ -27,11 +27,11 @@ Cypress.Commands.add("sendSubscriptionInProductsPage", (email) => {
   cy.get(".alert-success").should("be.visible");
 });
 
-Cypress.Commands.add("addProductInCart", (index) => {
+Cypress.Commands.add("addProductToCart", (index) => {
   cy.get('[class="single-products"]').eq(index).contains("Add to cart").click();
 });
 
-Cypress.Commands.add("messageProductAddedToCart", (boolean) => {
+Cypress.Commands.add("verifyProductAddedToCartMessage", (boolean) => {
   const continueShopping = boolean;
   cy.get('[id="cartModal"]').contains("Added!").should("be.visible");
   if (continueShopping) {
@@ -43,7 +43,7 @@ Cypress.Commands.add("messageProductAddedToCart", (boolean) => {
 });
 
 Cypress.Commands.add(
-  "selectCategoryProduct",
+  "selectProductCategory",
   (categoryProduct, subCategoryProduct) => {
     cy.get('[class="panel-group category-products"]')
       .should("be.visible")
@@ -58,7 +58,7 @@ Cypress.Commands.add(
   }
 );
 
-Cypress.Commands.add("selectBrandProduct", (brandProduct) => {
+Cypress.Commands.add("selectProductBrand", (brandProduct) => {
   cy.get('[class="brands_products"]')
     .should("be.visible")
     .contains(brandProduct)
@@ -70,7 +70,7 @@ Cypress.Commands.add("scrollToRecommendedProducts", () => {
   cy.get(".recommended_items > .title").scrollIntoView();
 });
 
-Cypress.Commands.add("selectRecommendedProduct", () => {
+Cypress.Commands.add("addRecommendedProductToCart", () => {
   cy.get('[id="recommended-item-carousel"]')
     .find('[data-product-id="1"]', { timeout: 10000 })
     .should("be.visible")

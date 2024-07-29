@@ -23,5 +23,7 @@ import './testCasesPageCommands'
 import './productsCommands'
 import './productDetailsCommands'
 import './cartCommands'
+import './orderCommands'
+import './paymentCommands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

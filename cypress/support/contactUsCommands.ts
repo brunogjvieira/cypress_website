@@ -1,11 +1,3 @@
-Cypress.Commands.add("enterToContactUsPage", () => {
-  cy.visit("/");
-  cy.contains(" Contact us").click();
-  cy.get('[class="contact-form"]')
-    .should("be.visible")
-    .find("h2")
-    .contains("Get In Touch");
-});
 Cypress.Commands.add("contactUsFillForm", (name, email, subject, message) => {
   cy.get('[data-qa="name"]').type(name).should("have.value", name);
   cy.get('[data-qa="email"]').type(email).should("have.value", email);

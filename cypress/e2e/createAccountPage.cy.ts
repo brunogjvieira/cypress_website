@@ -1,34 +1,43 @@
 import generatePerson from "../support/personModel";
 
 describe("Create Account", () => {
+  let randomPerson: any;
+  let pages: any;
+  let users: any;
+  before(() => {
+    cy.fixture("pages.json").then((loadedPages) => {
+      pages = loadedPages;
+    });
+    cy.fixture("users.json").then((loadedUsers) => {
+      users = loadedUsers;
+    });
+  });
+  beforeEach(() => {
+    randomPerson = generatePerson();
+  });
   it("Should register a new user", () => {
-    const person = generatePerson();
-    const personName = person.name;
-    const personEmail = person.email;
-    const personPassword = person.password
-    const personLastName = person.lastName;
-    const personCompany = person.company
-    const personAddress = person.address
-    const personAddressDetails = person.addressDetails
-    const personState = person.state
-    const personCity = person.city
-    const personZipcode = person.zipcode
-    const personPhoneNumber = person.phoneNumber
-
-    cy.enterToLoginPage();
-    cy.nameAndEmailFillForm(personName, personEmail);
+    cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
+    cy.nameAndEmailFillForm(randomPerson.name, randomPerson.email);
     cy.createAccountVerifyForm();
-    cy.createAccountFillForm(personPassword, personName, personLastName, personCompany, personAddress, personAddressDetails, personState, personCity, personZipcode, personPhoneNumber);
+    cy.createAccountFillForm(
+      randomPerson.password,
+      randomPerson.name,
+      randomPerson.lastName,
+      randomPerson.company,
+      randomPerson.address,
+      randomPerson.addressDetails,
+      randomPerson.state,
+      randomPerson.city,
+      randomPerson.zipcode,
+      randomPerson.phoneNumber
+    );
     cy.confirmCreatedAccount();
     cy.deleteAccount();
   });
 
   it("Should fail register new user with existing email", () => {
-    const personName = "brunoqa";
-    const personEmail = "brunoqa1@gmail.com";
-
-    cy.enterToLoginPage();
-    cy.nameAndEmailFillForm(personName, personEmail);
-    cy.messageFailedSignup()
+    cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
+    cy.nameAndEmailFillForm(users.bruno.name, users.bruno.email);
+    cy.messageFailedSignup();
   });
 });

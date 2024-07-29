@@ -1,5 +1,11 @@
-describe('Test Cases', () => {
-  it('Should verify if the test case page exist and All Titles', () => {
+describe("Test Cases", () => {
+  let pages: any;
+  before(() => {
+    cy.fixture("pages.json").then((loadedPages) => {
+      pages = loadedPages;
+    });
+  });
+  it("Should verify if the test case page exist and All Titles", () => {
     const expectedTitles = [
       "Test Case 1: Register User",
       "Test Case 2: Login User with correct email and password",
@@ -26,10 +32,13 @@ describe('Test Cases', () => {
       "Test Case 23: Verify address details in checkout page",
       "Test Case 24: Download Invoice after purchase order",
       "Test Case 25: Verify Scroll Up using 'Arrow' button and Scroll Down functionality",
-      "Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality"
+      "Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality",
     ];
 
-    cy.enterToTestCasesPage()
-    cy.verifyAllTestCasesPage(expectedTitles)
+    cy.navigateToPage(
+      pages.testCasesPage.name,
+      pages.testCasesPage.pageLoadSelector
+    );
+    cy.verifyAllTestCasesPage(expectedTitles);
   });
 });

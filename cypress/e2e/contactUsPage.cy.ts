@@ -1,15 +1,27 @@
 import generatePerson from "../support/personModel";
 
 describe("Contact Us", () => {
+  let pages: any;
+  let randomPerson: any;
+  before(() => {
+    cy.fixture("pages.json").then((loadedPages) => {
+      pages = loadedPages;
+    });
+  });
+  beforeEach(() => {
+    randomPerson = generatePerson();
+  });
   it("Should Fill the Contact Us Form and submit", () => {
-    const person = generatePerson();
-    const name = person.name;
-    const email = person.email;
-    const message = person.lorem;
-    const subject = person.lorem;
-
-    cy.enterToContactUsPage();
-    cy.contactUsFillForm(name, email, message, subject);
+    cy.navigateToPage(
+      pages.contactUsPage.name,
+      pages.contactUsPage.pageLoadSelector
+    );
+    cy.contactUsFillForm(
+      randomPerson.name,
+      randomPerson.email,
+      randomPerson.lorem,
+      randomPerson.lorem
+    );
     cy.insertUploadArquiveJPG();
     cy.contactUsSubmitButton();
     cy.contactUsSuccessMessage();

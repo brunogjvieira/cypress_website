@@ -1,11 +1,19 @@
-describe("Cart", () => {
-  it("Should send a subscription in the cart page", () => {
-    const email = "brunoqa1@gmail.com";
-    const cartPage = ' Cart'
-    const verifyCartPage = '#cart_items'
+import generatePerson from "../support/personModel";
 
-    cy.navigateToPage(cartPage, verifyCartPage);
-    cy.sendSubscriptionInCartPage(email);
+describe("Cart", () => {
+  let pages: any;
+  let randomPerson: any;
+  before(() => {
+    cy.fixture("pages.json").then((loadedPages) => {
+      pages = loadedPages;
+    });
+  });
+  beforeEach(() => {
+    randomPerson = generatePerson();
+  });
+  it("Should send a subscription in the cart page", () => {
+    cy.navigateToPage(pages.cartPage.name, pages.cartPage.pageLoadSelector);
+    cy.subscribeToNewsletterOnCartPage(randomPerson.email);
   });
 
   it("Should add two products in cart", () => {
@@ -13,12 +21,15 @@ describe("Cart", () => {
     var continueShopping = true;
     const indexSecondProduct = 1;
 
-    cy.enterToProductsPage();
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
     cy.addProductInCart(indexFirstProduct);
     cy.messageProductAddedToCart(continueShopping);
     cy.addProductInCart(indexSecondProduct);
     cy.messageProductAddedToCart((continueShopping = false));
-    cy.verifyItemFromCart();
+    cy.verifyItemsInCart();
   });
 
   it("Should verify product quantity in cart", () => {
@@ -26,7 +37,10 @@ describe("Cart", () => {
     const quantityProduct = 4;
     const continueShopping = false;
 
-    cy.enterToProductsPage();
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
     cy.viewProductByIndex(indexProduct);
     cy.addQuantityProductInDetailProductPage(quantityProduct);
     cy.addToCartInDetailProductPage();
@@ -38,12 +52,14 @@ describe("Cart", () => {
     const indexFirstProduct = 0;
     var continueShopping = false;
 
-    cy.enterToProductsPage();
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
     cy.addProductInCart(indexFirstProduct);
     cy.messageProductAddedToCart(continueShopping);
-    cy.verifyItemFromCart();
-    cy.removeItemInCartPage()
-    cy.verifyIfTheCartIsEmpty()
-
+    cy.verifyItemsInCart();
+    cy.removeItemInCartPage();
+    cy.verifyIfTheCartIsEmpty();
   });
 });

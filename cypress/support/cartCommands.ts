@@ -1,4 +1,4 @@
-Cypress.Commands.add("sendSubscriptionInCartPage", (email) => {
+Cypress.Commands.add("subscribeToNewsletterOnCartPage", (email) => {
   cy.get("#susbscribe_email")
     .scrollIntoView()
     .type(email)
@@ -7,7 +7,7 @@ Cypress.Commands.add("sendSubscriptionInCartPage", (email) => {
   cy.get(".alert-success").should("be.visible");
 });
 
-Cypress.Commands.add("verifyItemFromCart", () => {
+Cypress.Commands.add("verifyItemsInCart", () => {
   cy.get("#cart_info_table")
     .should("be.visible")
     .find("tbody")

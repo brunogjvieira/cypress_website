@@ -1,12 +1,3 @@
-Cypress.Commands.add("enterToLoginPage", () => {
-  cy.visit("/");
-  cy.contains(" Signup / Login").click();
-  cy.get('[class="login-form"]')
-    .should("be.visible")
-    .find("h2")
-    .contains("Login to your account");
-});
-
 Cypress.Commands.add("loginAccountFillForm", (email, password) => {
   cy.get('[data-qa="login-email"]').type(email).should("have.value", email);
   cy.get('[data-qa="login-password"]')
@@ -32,5 +23,5 @@ Cypress.Commands.add("clickLogoutButton", () => {
 });
 
 Cypress.Commands.add("confirmLogout", () => {
-  cy.url().should('include', '/login')
+  cy.url().should("include", "/login");
 });

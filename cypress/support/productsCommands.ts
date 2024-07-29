@@ -1,12 +1,3 @@
-Cypress.Commands.add("enterToProductsPage", () => {
-  cy.visit("/");
-  cy.contains(" Products").click();
-  cy.get('[class="features_items"]')
-    .should("be.visible")
-    .find("h2")
-    .contains("All Products");
-});
-
 Cypress.Commands.add("viewProductByIndex", (indexProduct) => {
   cy.get('[class="features_items"]')
     .find('[class="product-image-wrapper"]')
@@ -73,10 +64,6 @@ Cypress.Commands.add("selectBrandProduct", (brandProduct) => {
     .contains(brandProduct)
     .click();
   cy.get('[class="title text-center"]').should("contain.text", brandProduct);
-});
-
-Cypress.Commands.add("enterToHomePage", () => {
-  cy.visit("/");
 });
 
 Cypress.Commands.add("scrollToRecommendedProducts", () => {

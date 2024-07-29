@@ -1,8 +1,21 @@
 describe("Products", () => {
+  let pages: any;
+  let users: any;
+  before(() => {
+    cy.fixture("pages.json").then((loadedPages) => {
+      pages = loadedPages;
+    });
+    cy.fixture("users.json").then((loadedUsers) => {
+      users = loadedUsers;
+    });
+  });
   it("Should verify all products and product detail page", () => {
     const indexProduct = 0;
 
-    cy.enterToProductsPage();
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
     cy.viewProductByIndex(indexProduct);
     cy.verifyDetailProduct();
   });
@@ -10,16 +23,20 @@ describe("Products", () => {
   it("Should search a product", () => {
     const nameProduct = "Men tshirt";
 
-    cy.enterToProductsPage();
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
     cy.selectProductBySearch(nameProduct);
     cy.verifyQuantityProductsInThePage(1);
   });
 
   it("Should send a subscription in products page", () => {
-    const email = "brunoqa1@gmail.com";
-
-    cy.enterToProductsPage();
-    cy.sendSubscriptionInProductsPage(email);
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
+    cy.sendSubscriptionInProductsPage(users.bruno.email);
   });
 
   it("Should view category products", () => {
@@ -28,7 +45,10 @@ describe("Products", () => {
     const otherCategoryProduct = "Men";
     const otherSubCategoryProduct = "Tshirts";
 
-    cy.enterToProductsPage();
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
     cy.selectCategoryProduct(categoryProduct, subCategoryProduct);
     cy.verifyQuantityProductsInThePage(3);
     cy.selectCategoryProduct(otherCategoryProduct, otherSubCategoryProduct);
@@ -39,36 +59,38 @@ describe("Products", () => {
     const brandProduct = "Polo";
     const otherBrandProduct = "Madame";
 
-    cy.enterToProductsPage();
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
     cy.selectBrandProduct(brandProduct);
     cy.verifyQuantityProductsInThePage(6);
     cy.selectBrandProduct(otherBrandProduct);
     cy.verifyQuantityProductsInThePage(5);
   });
 
-  it.only("Should search a product and add cart", () => {
+  it("Should search a product and add cart", () => {
     const nameProduct = "tshirt";
     const quantityProductFiltered = 6;
     const indexFirstProductToCart = 0;
     const indexSecondProductToCart = 2;
     var continueShopping = true;
-    const emailUser = "brunoqa1@gmail.com";
-    const passwordUser = "brunoqa";
-    const cartPage = ' Cart'
-    const verifyCartPage = '#cart_items'
 
-    cy.enterToProductsPage();
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
     cy.selectProductBySearch(nameProduct);
     cy.verifyQuantityProductsInThePage(quantityProductFiltered);
     cy.addProductInCart(indexFirstProductToCart);
     cy.messageProductAddedToCart(continueShopping);
     cy.addProductInCart(indexSecondProductToCart);
     cy.messageProductAddedToCart((continueShopping = false));
-    cy.verifyItemFromCart();
-    cy.enterToLoginPage();
-    cy.loginAccountFillForm(emailUser, passwordUser);
-    cy.navigateToPage(cartPage, verifyCartPage);
-    cy.verifyItemFromCart();
+    cy.verifyItemsInCart();
+    cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
+    cy.loginAccountFillForm(users.bruno.email, users.bruno.password);
+    cy.navigateToPage(pages.cartPage.name, pages.cartPage.pageLoadSelector);
+    cy.verifyItemsInCart();
   });
 
   it("Should add review on product", () => {
@@ -77,7 +99,10 @@ describe("Products", () => {
     const email = "test@gmail.com";
     const message = "Lorem ipsum";
 
-    cy.enterToProductsPage();
+    cy.navigateToPage(
+      pages.productsPage.name,
+      pages.productsPage.pageLoadSelector
+    );
     cy.viewProductByIndex(indexProduct);
     cy.sendMessageReviewOnProduct(username, email, message);
     cy.confirmMessageReview();
@@ -86,26 +111,22 @@ describe("Products", () => {
   it("Should add to cart from recommended products", () => {
     const continueShopping = false;
 
-    cy.enterToHomePage();
+    cy.navigateToPage(pages.homePage.name, pages.homePage.pageLoadSelector);
     cy.scrollToRecommendedProducts();
     cy.selectRecommendedProduct();
     cy.messageProductAddedToCart(continueShopping);
-    cy.verifyItemFromCart();
+    cy.verifyItemsInCart();
   });
 
   it("Should verify scroll up using 'Arrow' button and scroll down functionality ", () => {
-    const email = "brunoqa1@gmail.com";
-
-    cy.enterToHomePage();
-    cy.sendSubscriptionInProductsPage(email);
+    cy.navigateToPage(pages.homePage.name, pages.homePage.pageLoadSelector);
+    cy.sendSubscriptionInProductsPage(users.bruno.email);
     cy.scrollUpUsingArrow();
   });
 
   it("Should verify scroll up without 'Arrow' button and scroll down functionality ", () => {
-    const email = "brunoqa1@gmail.com";
-
-    cy.enterToHomePage();
-    cy.sendSubscriptionInProductsPage(email);
+    cy.navigateToPage(pages.homePage.name, pages.homePage.pageLoadSelector);
+    cy.sendSubscriptionInProductsPage(users.bruno.email);
     cy.scrollUpWithoutArrow();
   });
 });

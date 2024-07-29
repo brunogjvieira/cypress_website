@@ -1,0 +1,26 @@
+{
+  "cartPage": {
+    "name": "Cart",
+    "pageLoadSelector": "#cart_items"
+  },
+  "productsPage": {
+    "name": "Products",
+    "pageLoadSelector": ".features_items"
+  },
+  "contactUsPage": {
+    "name": "Contact us",
+    "pageLoadSelector": ".contact-form"
+  },
+  "loginPage": {
+    "name": "Signup / Login",
+    "pageLoadSelector": ".login-form"
+  },
+  "homePage": {
+    "name": "Home",
+    "pageLoadSelector": "#slider"
+  },
+  "testCasesPage": {
+    "name": "Test Cases",
+    "pageLoadSelector": "#form"
+  }
+}

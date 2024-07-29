@@ -1,5 +1,3 @@
-import 'cypress-plugin-api'
-
 Cypress.Commands.add("clickProceedToCheckout", () => {
   cy.contains("Proceed To Checkout").click();
 });

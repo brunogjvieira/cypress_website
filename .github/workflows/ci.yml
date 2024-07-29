@@ -1,12 +1,26 @@
-name: End-to-end tests 🧪
-on: [push]
+name: End-to-End Tests 🧪
+
+on:
+  push:
+    branches:
+      - main  # Ajuste para o nome da sua branch principal, se necessário
+  schedule:
+    - cron: '0 12 * * *'  # Executa diariamente ao meio-dia UTC
+
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Cypress Tests
+        run: npx cypress run 

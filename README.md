@@ -1,10 +1,14 @@
 # cypress_website
-This repository will be used to show my habilities with automatization
+This repository demonstrates my skills in automation. I use a free website called automationexercise.com to practice and improve my abilities. I have completed all 26 tests offered by the site, applying best practices. I also integrated it with GitHub Actions. For any questions or inquiries, feel free to send me a message on LinkedIn: LinkedIn Profile.
 
-Install node and NPM and run these commands:
-1- npm init
-2- npm install typescript --save-dev
-3- npx tsc --init
-4- yarn add --dev cypress
-5- yarn add --dev typescript @types/cypress
-6- npm install faker-br --save-dev
+To set up the project, install Node.js and npm, and run the following commands:
+
+npm install
+
+If you want to start a new project run the following commands:
+npm init
+npm install typescript --save-dev
+npx tsc --init
+yarn add --dev cypress
+yarn add --dev typescript @types/cypress
+npm install faker-br --save-dev

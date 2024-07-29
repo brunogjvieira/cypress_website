@@ -9,44 +9,44 @@ Cypress.Commands.add("nameAndEmailFillForm", (name, email) => {
   cy.get('[data-qa="signup-button"]').click();
 });
 
-Cypress.Commands.add("createAccountFillForm", () => {
+Cypress.Commands.add("createAccountFillForm", (password, name, lastName, company, address, addressDetails, state, city, zipcode, phoneNumber) => {
   cy.get("#id_gender1").check();
   cy.get("#newsletter").check();
   cy.get("#optin").check();
   cy.get('[data-qa="password"]')
-    .type(person.password)
-    .should("have.value", `${person.password}`);
+    .type(password)
+    .should("have.value", password);
   cy.get('[data-qa="days"]').select(1).should("have.value", "1");
   cy.get('[data-qa="months"]').select("January").should("have.value", "1");
   cy.get('[data-qa="years"]').select("2020").should("have.value", "2020");
   cy.get('[data-qa="first_name"]')
-    .type(person.name)
-    .should("have.value", `${person.name}`);
+    .type(name)
+    .should("have.value", name);
   cy.get('[data-qa="last_name"]')
-    .type(person.lastName)
-    .should("have.value", `${person.lastName}`);
+    .type(lastName)
+    .should("have.value", lastName);
   cy.get('[data-qa="company"]')
-    .type(person.company)
-    .should("have.value", `${person.company}`);
+    .type(company)
+    .should("have.value", company);
   cy.get('[data-qa="address"]')
-    .type(person.address)
-    .should("have.value", `${person.address}`);
+    .type(address)
+    .should("have.value", address);
   cy.get('[data-qa="address2"]')
-    .type(person.addressDetails)
-    .should("have.value", `${person.addressDetails}`);
+    .type(addressDetails)
+    .should("have.value", addressDetails);
   cy.get('[data-qa="country"]').type("India").should("have.value", "India");
   cy.get('[data-qa="state"]')
-    .type(person.state)
-    .should("have.value", `${person.state}`);
+    .type(state)
+    .should("have.value", state);
   cy.get('[data-qa="city"]')
-    .type(person.city)
-    .should("have.value", `${person.city}`);
+    .type(city)
+    .should("have.value", city);
   cy.get('[data-qa="zipcode"]')
-    .type(person.zipcode)
-    .should("have.value", `${person.zipcode}`);
+    .type(zipcode)
+    .should("have.value", zipcode);
   cy.get('[data-qa="mobile_number"]')
-    .type(person.phoneNumber)
-    .should("have.value", `${person.phoneNumber}`);
+    .type(phoneNumber)
+    .should("have.value", phoneNumber);
   cy.get('[data-qa="create-account"]').click();
 });
 

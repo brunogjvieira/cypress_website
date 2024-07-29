@@ -5,11 +5,20 @@ describe("Create Account", () => {
     const person = generatePerson();
     const personName = person.name;
     const personEmail = person.email;
+    const personPassword = person.password
+    const personLastName = person.lastName;
+    const personCompany = person.company
+    const personAddress = person.address
+    const personAddressDetails = person.addressDetails
+    const personState = person.state
+    const personCity = person.city
+    const personZipcode = person.zipcode
+    const personPhoneNumber = person.phoneNumber
 
     cy.enterToLoginPage();
     cy.nameAndEmailFillForm(personName, personEmail);
     cy.createAccountVerifyForm();
-    cy.createAccountFillForm();
+    cy.createAccountFillForm(personPassword, personName, personLastName, personCompany, personAddress, personAddressDetails, personState, personCity, personZipcode, personPhoneNumber);
     cy.confirmCreatedAccount();
     cy.deleteAccount();
   });

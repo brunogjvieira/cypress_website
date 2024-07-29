@@ -1,9 +1,3 @@
-Cypress.Commands.add("enterToCartPage", () => {
-  cy.visit("/");
-  cy.contains(" Cart").click();
-  cy.get("#cart_items").should("be.visible");
-});
-
 Cypress.Commands.add("sendSubscriptionInCartPage", (email) => {
   cy.get("#susbscribe_email")
     .scrollIntoView()
@@ -39,3 +33,19 @@ Cypress.Commands.add("verifyItemFromCart", () => {
       cy.wrap(product).find('[class="cart_delete"]').should("be.visible");
     });
 });
+
+Cypress.Commands.add('verifyQuantitySameProductInCartPage', (quantityProductAdd) => {
+    cy.get('[class="cart_quantity"]').find('button').then((quantityInCart) => {
+      const quantityText = quantityInCart.text();
+      const quantityNumber = parseInt(quantityText, 10);
+    expect(quantityNumber).to.equal(quantityProductAdd);
+    })
+})
+
+Cypress.Commands.add('removeItemInCartPage', () => {
+  cy.get('[class="cart_quantity_delete"]').click();
+})
+
+Cypress.Commands.add('verifyIfTheCartIsEmpty', () => {
+  cy.contains('Cart is empty!').should('be.visible')
+})

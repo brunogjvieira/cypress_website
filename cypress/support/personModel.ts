@@ -15,6 +15,11 @@ interface Person {
   cpf: string;
   lorem: string;
   wrongEmailFormat: string;
+  cardName : string;
+  cardNumber : string;
+  cardCvc: string;
+  cardExpirationYear : string;
+  cardExpirationMonth : string;
 }
 
 const generatePerson = (): Person => {
@@ -32,7 +37,12 @@ const generatePerson = (): Person => {
     phoneNumber: faker.phone.phoneNumber(),
     cpf: faker.br.cpf(),
     lorem: faker.lorem.word(1),
-    wrongEmailFormat: 'wrongEmailFormat'
+    wrongEmailFormat: 'wrongEmailFormat',
+    cardName : faker.finance.accountName(),
+    cardNumber : faker.finance.creditCardNumber(),
+    cardCvc: faker.finance.creditCardCVV(),
+    cardExpirationYear : faker.date.past().getFullYear().toString(),
+    cardExpirationMonth : '10'
   }
 }
 

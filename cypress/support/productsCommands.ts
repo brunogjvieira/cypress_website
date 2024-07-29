@@ -47,6 +47,47 @@ Cypress.Commands.add("messageProductAddedToCart", (boolean) => {
     cy.contains("Continue Shopping").should("be.visible").click();
   } else {
     cy.contains("View Cart").should("be.visible").click();
-    cy.url().should('include', 'view_cart')
+    cy.url().should("include", "view_cart");
   }
+});
+
+Cypress.Commands.add(
+  "selectCategoryProduct",
+  (categoryProduct, subCategoryProduct) => {
+    cy.get('[class="panel-group category-products"]')
+      .should("be.visible")
+      .contains(categoryProduct)
+      .click();
+    cy.get('[class="panel-group category-products"]')
+      .contains(subCategoryProduct)
+      .click();
+    cy.get('[class="title text-center"]')
+      .should("contain.text", categoryProduct)
+      .and("contain.text", subCategoryProduct);
+  }
+);
+
+Cypress.Commands.add("selectBrandProduct", (brandProduct) => {
+  cy.get('[class="brands_products"]')
+    .should("be.visible")
+    .contains(brandProduct)
+    .click();
+  cy.get('[class="title text-center"]').should("contain.text", brandProduct);
+});
+
+Cypress.Commands.add("enterToHomePage", () => {
+  cy.visit("/");
+});
+
+Cypress.Commands.add("scrollToRecommendedProducts", () => {
+  cy.get(".recommended_items > .title").scrollIntoView();
+});
+
+Cypress.Commands.add("selectRecommendedProduct", () => {
+  cy.get('[id="recommended-item-carousel"]')
+    .find('[data-product-id="1"]', { timeout: 10000 })
+    .should("be.visible")
+    .contains("Add to cart")
+    .eq(0)
+    .click();
 });

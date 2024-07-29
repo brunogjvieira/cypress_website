@@ -6,7 +6,18 @@ declare namespace Cypress {
      * Comando personalizado para teste.
      * @example cy.teste()
      */
-    createAccountFillForm(): Chainable<any>;
+    createAccountFillForm(
+      password,
+      name,
+      lastName,
+      company,
+      address,
+      addressDetails,
+      state,
+      city,
+      zipCode,
+      phoneNumber
+    ): Chainable<any>;
     nameAndEmailFillForm(name, email): any;
     confirmCreatedAccount(): any;
     createAccountVerifyForm(): any;
@@ -32,10 +43,63 @@ declare namespace Cypress {
     selectProductBySearch(nameProduct): any;
     verifyQuantityProductsInThePage(quantityProduct): any;
     sendSubscriptionInProductsPage(email): any;
-    enterToCartPage(): any;
     sendSubscriptionInCartPage(email): any;
     addProductInCart(index): any;
     messageProductAddedToCart(boolean): any;
     verifyItemFromCart(): any;
+    addQuantityProductInDetailProductPage(quantity): any;
+    addToCartInDetailProductPage(): any;
+    verifyQuantitySameProductInCartPage(quantityProductAdd): any;
+    proceedToCheckoutButton(): any;
+    messageOrderCheckoutLogin(boolean): any;
+    verifyUserBillingAddressCheckoutPage(
+      name,
+      lastName,
+      company,
+      address,
+      addressDetails,
+      city,
+      state,
+      zipcode,
+      country,
+      phoneNumber
+    ): any;
+    verifyUserDeliveryAddressCheckoutPage(
+      name,
+      lastName,
+      company,
+      address,
+      addressDetails,
+      city,
+      state,
+      zipcode,
+      country,
+      phoneNumber
+    ): any;
+    verifyItemFromCheckoutPage(): any;
+    sendCommentInCheckoutPage(text): any;
+    placeOrderButton(): any;
+    paymentFillForm(
+      cardName,
+      cardNumber,
+      cardCvc,
+      cardMonthExpiration,
+      cardYearExpiration
+    ): any;
+    submitPaymentButton(): any;
+    paymentSuccessMessage(): any;
+    removeItemInCartPage(): any;
+    verifyIfTheCartIsEmpty(): any;
+    selectCategoryProduct(categoryProduct, subCategoryProduct): any;
+    selectBrandProduct(brandProduct): any;
+    sendMessageReviewOnProduct(name, email, message): any;
+    confirmMessageReview(): any;
+    enterToHomePage(): any;
+    scrollToRecommendedProducts(): any;
+    selectRecommendedProduct(): any;
+    downloadInvoice(request): any;
+    scrollUpUsingArrow(): any;
+    scrollUpWithoutArrow(): any;
+    navigateToPage(namePage, verifyPage): any;
   }
 }

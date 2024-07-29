@@ -34,7 +34,7 @@ Cypress.Commands.add("verifyItemsInCart", () => {
     });
 });
 
-Cypress.Commands.add('verifyQuantitySameProductInCartPage', (quantityProductAdd) => {
+Cypress.Commands.add('verifyProductQuantityInCart', (quantityProductAdd) => {
     cy.get('[class="cart_quantity"]').find('button').then((quantityInCart) => {
       const quantityText = quantityInCart.text();
       const quantityNumber = parseInt(quantityText, 10);
@@ -42,10 +42,10 @@ Cypress.Commands.add('verifyQuantitySameProductInCartPage', (quantityProductAdd)
     })
 })
 
-Cypress.Commands.add('removeItemInCartPage', () => {
+Cypress.Commands.add('removeItemFromCart', () => {
   cy.get('[class="cart_quantity_delete"]').click();
 })
 
-Cypress.Commands.add('verifyIfTheCartIsEmpty', () => {
+Cypress.Commands.add('verifyCartIsEmpty', () => {
   cy.contains('Cart is empty!').should('be.visible')
 })

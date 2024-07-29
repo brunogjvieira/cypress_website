@@ -1,7 +1,4 @@
-import generatePerson from "./personModel";
-
-const person = generatePerson();
-Cypress.Commands.add("nameAndEmailFillForm", (name, email) => {
+Cypress.Commands.add("fillNameAndEmailForm", (name, email) => {
   cy.get('[data-qa="signup-name"]').type(name).should("have.value", `${name}`);
   cy.get('[data-qa="signup-email"]')
     .type(email)
@@ -9,7 +6,7 @@ Cypress.Commands.add("nameAndEmailFillForm", (name, email) => {
   cy.get('[data-qa="signup-button"]').click();
 });
 
-Cypress.Commands.add("createAccountFillForm", (password, name, lastName, company, address, addressDetails, state, city, zipcode, phoneNumber) => {
+Cypress.Commands.add("fillAccountCreationForm", (password, name, lastName, company, address, addressDetails, state, city, zipcode, phoneNumber) => {
   cy.get("#id_gender1").check();
   cy.get("#newsletter").check();
   cy.get("#optin").check();
@@ -50,7 +47,7 @@ Cypress.Commands.add("createAccountFillForm", (password, name, lastName, company
   cy.get('[data-qa="create-account"]').click();
 });
 
-Cypress.Commands.add("createAccountVerifyForm", () => {
+Cypress.Commands.add("verifyAccountCreationForm", () => {
   cy.get('[class="login-form"]')
     .find("label")
     .then((nameField) => {
@@ -62,7 +59,7 @@ Cypress.Commands.add("createAccountVerifyForm", () => {
     });
 });
 
-Cypress.Commands.add("confirmCreatedAccount", () => {
+Cypress.Commands.add("confirmAccountCreation", () => {
   cy.get('[data-qa="account-created"]').should("be.visible");
   cy.url().should("include", "/account_created");
   cy.get('[data-qa="continue-button"]').click();
@@ -73,6 +70,6 @@ Cypress.Commands.add("deleteAccount", () => {
   cy.get('[data-qa="account-deleted"]').should("be.visible");
 });
 
-Cypress.Commands.add("messageFailedSignup", () => {
+Cypress.Commands.add("verifySignupFailureMessage", () => {
   cy.contains("Email Address already exist!").should("be.visible");
 });

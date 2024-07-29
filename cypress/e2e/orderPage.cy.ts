@@ -16,7 +16,7 @@ describe('Place Order', () => {
   beforeEach(() => {
     randomPerson = generatePerson();
   });
-  it('Should place order: register while checkout', () => {
+  it('Should register while checking out and place an order', () => {
     const indexProduct = 0;
     const continueShopping = true;
     const continueOrder = true;
@@ -24,70 +24,69 @@ describe('Place Order', () => {
     const checkoutMessage = 'teste'
     
     cy.navigateToPage(pages.productsPage.name, pages.productsPage.pageLoadSelector);
-    cy.addProductInCart(indexProduct);
-    cy.messageProductAddedToCart(continueShopping);
+    cy.addProductToCart(indexProduct);
+    cy.verifyProductAddedToCartMessage(continueShopping);
     cy.navigateToPage(pages.cartPage.name, pages.cartPage.pageLoadSelector);
-    cy.proceedToCheckoutButton()
-    cy.messageOrderCheckoutLogin(continueOrder)
-    cy.nameAndEmailFillForm(randomPerson.name, randomPerson.email);
-    cy.createAccountFillForm(randomPerson.password, randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.state, randomPerson.city, randomPerson.zipcode, randomPerson.phoneNumber);
-    cy.confirmCreatedAccount();
-    cy.verifyLogged(randomPerson.name)
+    cy.clickProceedToCheckout()
+    cy.messageCheckoutLogin(continueOrder)
+    cy.fillNameAndEmailForm(randomPerson.name, randomPerson.email);
+    cy.fillAccountCreationForm(randomPerson.password, randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.state, randomPerson.city, randomPerson.zipcode, randomPerson.phoneNumber);
+    cy.confirmAccountCreation();
+    cy.verifyUserIsLoggedIn(randomPerson.name)
     cy.navigateToPage(pages.cartPage.name, pages.cartPage.pageLoadSelector);
-    cy.proceedToCheckoutButton()
-    cy.verifyUserDeliveryAddressCheckoutPage(randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.city, randomPerson.state, randomPerson.zipcode, personCountry, randomPerson.phoneNumber)
-    cy.verifyItemFromCheckoutPage()
-    cy.sendCommentInCheckoutPage(checkoutMessage)
-    cy.placeOrderButton()
-    cy.paymentFillForm(randomPerson.cardName, randomPerson.cardNumber, randomPerson.cardCvc, randomPerson.cardExpirationMonth, randomPerson.cardExpirationYear)
-    cy.submitPaymentButton()
-    cy.paymentSuccessMessage()
+    cy.clickProceedToCheckout()
+    cy.verifyUserDeliveryAddressOnCheckoutPage(randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.city, randomPerson.state, randomPerson.zipcode, personCountry, randomPerson.phoneNumber)
+    cy.verifyItemsOnCheckoutPage()
+    cy.addCommentToCheckoutPage(checkoutMessage)
+    cy.clickPlaceOrder()
+    cy.fillPaymentForm(randomPerson.cardName, randomPerson.cardNumber, randomPerson.cardCvc, randomPerson.cardExpirationMonth, randomPerson.cardExpirationYear)
+    cy.submitPayment()
+    cy.verifyPaymentSuccessMessage()
   });
 
-  it('Should place order: register before checkout', () => {
+  it('Should register before checkout and place an order', () => {
     const indexProduct = 0;
     const continueShopping = false;
     const personCountry = 'India'
     const checkoutMessage = 'teste'
 
     cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
-    cy.nameAndEmailFillForm(randomPerson.name, randomPerson.email);
-    cy.createAccountFillForm(randomPerson.password, randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.state, randomPerson.city, randomPerson.zipcode, randomPerson.phoneNumber);
-    cy.confirmCreatedAccount();
-    cy.verifyLogged(randomPerson.name)
-    cy.addProductInCart(indexProduct);
-    cy.messageProductAddedToCart(continueShopping);
-    cy.proceedToCheckoutButton()
-    cy.verifyUserDeliveryAddressCheckoutPage(randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.city, randomPerson.state, randomPerson.zipcode, personCountry, randomPerson.phoneNumber)
-    cy.verifyUserBillingAddressCheckoutPage(randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.city, randomPerson.state, randomPerson.zipcode, personCountry, randomPerson.phoneNumber)
-    cy.verifyItemFromCheckoutPage()
-    cy.sendCommentInCheckoutPage(checkoutMessage)
-    cy.placeOrderButton()
-    cy.paymentFillForm(randomPerson.cardName, randomPerson.cardNumber, randomPerson.cardCvc, randomPerson.cardExpirationMonth, randomPerson.cardExpirationYear)
-    cy.submitPaymentButton()
-    cy.paymentSuccessMessage()
+    cy.fillNameAndEmailForm(randomPerson.name, randomPerson.email);
+    cy.fillAccountCreationForm(randomPerson.password, randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.state, randomPerson.city, randomPerson.zipcode, randomPerson.phoneNumber);
+    cy.confirmAccountCreation();
+    cy.verifyUserIsLoggedIn(randomPerson.name)
+    cy.addProductToCart(indexProduct);
+    cy.verifyProductAddedToCartMessage(continueShopping);
+    cy.clickProceedToCheckout()
+    cy.verifyUserDeliveryAddressOnCheckoutPage(randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.city, randomPerson.state, randomPerson.zipcode, personCountry, randomPerson.phoneNumber)
+    cy.verifyUserBillingAddressOnCheckoutPage(randomPerson.name, randomPerson.lastName, randomPerson.company, randomPerson.address, randomPerson.addressDetails, randomPerson.city, randomPerson.state, randomPerson.zipcode, personCountry, randomPerson.phoneNumber)
+    cy.verifyItemsOnCheckoutPage()
+    cy.addCommentToCheckoutPage(checkoutMessage)
+    cy.clickPlaceOrder()
+    cy.fillPaymentForm(randomPerson.cardName, randomPerson.cardNumber, randomPerson.cardCvc, randomPerson.cardExpirationMonth, randomPerson.cardExpirationYear)
+    cy.submitPayment()
+    cy.verifyPaymentSuccessMessage()
   });
 
-  it('Should place order: login before checkout and downloaded invoice', () => {
+  it('Should log in before checkout and download invoice', () => {
     cy.intercept('GET',
-      'https://automationexercise.com/download_invoice/500').as('getInvoice')
+      '**/download_invoice/**').as('getInvoice')
     const indexProduct = 0;
     const continueShopping = false;
     const checkoutMessage = 'teste'
 
     cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
-    cy.loginAccountFillForm(users.bruno.email, users.bruno.password);
-    cy.confirmButtonLogin();
-    cy.verifyLogged(users.bruno.name)
-    cy.addProductInCart(indexProduct);
-    cy.messageProductAddedToCart(continueShopping);
-    cy.proceedToCheckoutButton()
-    cy.verifyItemFromCheckoutPage()
-    cy.sendCommentInCheckoutPage(checkoutMessage)
-    cy.placeOrderButton()
-    cy.paymentFillForm(randomPerson.cardName, randomPerson.cardNumber, randomPerson.cardCvc, randomPerson.cardExpirationMonth, randomPerson.cardExpirationYear)
-    cy.submitPaymentButton()
-    cy.paymentSuccessMessage()
-    cy.downloadInvoice(`getInvoice`)
+    cy.fillLoginForm(users.bruno.email, users.bruno.password);
+    cy.verifyUserIsLoggedIn(users.bruno.name)
+    cy.addProductToCart(indexProduct);
+    cy.verifyProductAddedToCartMessage(continueShopping);
+    cy.clickProceedToCheckout()
+    cy.verifyItemsOnCheckoutPage()
+    cy.addCommentToCheckoutPage(checkoutMessage)
+    cy.clickPlaceOrder()
+    cy.fillPaymentForm(randomPerson.cardName, randomPerson.cardNumber, randomPerson.cardCvc, randomPerson.cardExpirationMonth, randomPerson.cardExpirationYear)
+    cy.submitPayment()
+    cy.verifyPaymentSuccessMessage()
+    cy.verifyDownloadedInvoice(`getInvoice`)
   });
 });

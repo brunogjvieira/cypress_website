@@ -14,16 +14,16 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './signupCommands'
+import './signupFunctions'
 import './personModel'
-import './loginCommands'
-import './contactUsCommands'
+import './loginFunctions'
+import './contactUsFunctions'
 import './utils'
-import './testCasesPageCommands'
-import './productsCommands'
-import './productDetailsCommands'
-import './cartCommands'
-import './orderCommands'
-import './paymentCommands'
+import './testCasesPageFunctions'
+import './productsFunctions'
+import './productDetailsFunctions'
+import './cartFunctions'
+import './checkOutFunctions'
+import './paymentFunctions'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

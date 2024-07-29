@@ -1,4 +1,4 @@
-Cypress.Commands.add("verifyAllTestCasesPage", (array) => {
+Cypress.Commands.add("verifyTestCasesOnPage", (array) => {
   cy.get('[id="form"]')
     .find('[class="panel-title"]')
     .find("u")

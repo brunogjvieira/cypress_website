@@ -6,7 +6,7 @@ declare namespace Cypress {
      * Comando personalizado para teste.
      * @example cy.teste()
      */
-    createAccountFillForm(
+    fillAccountCreationForm(
       password,
       name,
       lastName,
@@ -18,37 +18,36 @@ declare namespace Cypress {
       zipCode,
       phoneNumber
     ): Chainable<any>;
-    nameAndEmailFillForm(name, email): any;
-    confirmCreatedAccount(): any;
-    createAccountVerifyForm(): any;
+    fillNameAndEmailForm(name, email): any;
+    confirmAccountCreation(): any;
+    verifyAccountCreationForm(): any;
     deleteAccount(): any;
-    loginAccountFillForm(email, password): any;
-    confirmButtonLogin(): any;
-    verifyLogged(username): any;
-    messageFailedLogin(): any;
-    clickLogoutButton(): any;
-    confirmLogout(): any;
-    messageFailedSignup(): any;
-    contactUsFillForm(name, email, subject, message): any;
+    fillLoginForm(email, password): any;
+    verifyUserIsLoggedIn(username): any;
+    verifyFailedLoginMessage(): any;
+    logout(): any;
+    verifyLogoutSuccess(): any;
+    verifySignupFailureMessage(): any;
+    fillContactUsForm(name, email, subject, message): any;
     insertUploadArquiveJPG(): any;
-    contactUsSubmitButton(): any;
-    contactUsSuccessMessage(): any;
-    verifyAllTestCasesPage(array: string[]): Chainable<void>;
+    submitContactUsForm(): any;
+    verifyContactUsSuccessMessage(): any;
+    verifyTestCasesOnPage(array: string[]): Chainable<void>;
     viewProductByIndex(indexProduct): any;
-    verifyDetailProduct(): any;
-    selectProductBySearch(nameProduct): any;
-    verifyQuantityProductsInThePage(quantityProduct): any;
-    sendSubscriptionInProductsPage(email): any;
+    verifyProductDetails(): any;
+    searchProductByName(nameProduct): any;
+    verifyProductCountOnPage(quantityProduct): any;
+    sendSubscriptionOnProductsPage(email): any;
     subscribeToNewsletterOnCartPage(email): any;
-    addProductInCart(index): any;
-    messageProductAddedToCart(boolean): any;
+    addProductToCart(index): any;
+    verifyProductAddedToCartMessage(boolean): any;
     verifyItemsInCart(): any;
-    addQuantityProductInDetailProductPage(quantity): any;
-    addToCartInDetailProductPage(): any;
-    verifyQuantitySameProductInCartPage(quantityProductAdd): any;
-    proceedToCheckoutButton(): any;
-    messageOrderCheckoutLogin(boolean): any;
-    verifyUserBillingAddressCheckoutPage(
+    setProductQuantity(quantity): any;
+    addToCartOnDetailProductPage(): any;
+    verifyProductQuantityInCart(quantityProductAdd): any;
+    clickProceedToCheckout(): any;
+    messageCheckoutLogin(boolean): any;
+    verifyUserBillingAddressOnCheckoutPage(
       name,
       lastName,
       company,
@@ -60,7 +59,7 @@ declare namespace Cypress {
       country,
       phoneNumber
     ): any;
-    verifyUserDeliveryAddressCheckoutPage(
+    verifyUserDeliveryAddressOnCheckoutPage(
       name,
       lastName,
       company,
@@ -72,27 +71,27 @@ declare namespace Cypress {
       country,
       phoneNumber
     ): any;
-    verifyItemFromCheckoutPage(): any;
-    sendCommentInCheckoutPage(text): any;
-    placeOrderButton(): any;
-    paymentFillForm(
+    verifyItemsOnCheckoutPage(): any;
+    addCommentToCheckoutPage(text): any;
+    clickPlaceOrder(): any;
+    fillPaymentForm(
       cardName,
       cardNumber,
       cardCvc,
       cardMonthExpiration,
       cardYearExpiration
     ): any;
-    submitPaymentButton(): any;
-    paymentSuccessMessage(): any;
-    removeItemInCartPage(): any;
-    verifyIfTheCartIsEmpty(): any;
-    selectCategoryProduct(categoryProduct, subCategoryProduct): any;
-    selectBrandProduct(brandProduct): any;
-    sendMessageReviewOnProduct(name, email, message): any;
-    confirmMessageReview(): any;
+    submitPayment(): any;
+    verifyPaymentSuccessMessage(): any;
+    removeItemFromCart(): any;
+    verifyCartIsEmpty(): any;
+    selectProductCategory(categoryProduct, subCategoryProduct): any;
+    selectProductBrand(brandProduct): any;
+    submitProductReview(name, email, message): any;
+    verifyReviewConfirmation(): any;
     scrollToRecommendedProducts(): any;
-    selectRecommendedProduct(): any;
-    downloadInvoice(request): any;
+    addRecommendedProductToCart(): any;
+    verifyDownloadedInvoice(request): any;
     scrollUpUsingArrow(): any;
     scrollUpWithoutArrow(): any;
     navigateToPage(namePage, verifyPage): any;

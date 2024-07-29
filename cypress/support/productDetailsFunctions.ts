@@ -1,4 +1,4 @@
-Cypress.Commands.add("verifyDetailProduct", () => {
+Cypress.Commands.add("verifyProductDetails", () => {
   cy.get('[class="product-information"]')
     .should("be.visible")
     .then((infoProduct) => {
@@ -13,21 +13,21 @@ Cypress.Commands.add("verifyDetailProduct", () => {
     });
 });
 
-Cypress.Commands.add("addQuantityProductInDetailProductPage", (quantity) => {
+Cypress.Commands.add("setProductQuantity", (quantity) => {
   cy.get("#quantity").clear().type(quantity).should("have.value", quantity);
 });
 
-Cypress.Commands.add('addToCartInDetailProductPage', () => {
+Cypress.Commands.add('addToCartOnDetailProductPage', () => {
   cy.get('[type="button"]').contains('Add to cart').click()
 })
 
-Cypress.Commands.add('sendMessageReviewOnProduct', (name, email, message) => {
+Cypress.Commands.add('submitProductReview', (name, email, message) => {
   cy.get('#name').type(name).should("have.value", name)
   cy.get('#email').type(email).should("have.value", email)
   cy.get('#review').type(message).should("have.value", message)
   cy.get('#button-review').click()
 })
 
-Cypress.Commands.add('confirmMessageReview', () => {
+Cypress.Commands.add('verifyReviewConfirmation', () => {
   cy.contains('Thank you for your review.').should('be.visible')
 })

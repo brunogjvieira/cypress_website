@@ -5,7 +5,7 @@ describe("Test Cases", () => {
       pages = loadedPages;
     });
   });
-  it("Should verify if the test case page exist and All Titles", () => {
+  it("Should verify if the test cases page exists and all Tests Titles", () => {
     const expectedTitles = [
       "Test Case 1: Register User",
       "Test Case 2: Login User with correct email and password",
@@ -39,6 +39,6 @@ describe("Test Cases", () => {
       pages.testCasesPage.name,
       pages.testCasesPage.pageLoadSelector
     );
-    cy.verifyAllTestCasesPage(expectedTitles);
+    cy.verifyTestCasesOnPage(expectedTitles);
   });
 });

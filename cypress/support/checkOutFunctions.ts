@@ -1,10 +1,8 @@
-import 'cypress-plugin-api'
-
-Cypress.Commands.add("proceedToCheckoutButton", () => {
+Cypress.Commands.add("clickProceedToCheckout", () => {
   cy.contains("Proceed To Checkout").click();
 });
 
-Cypress.Commands.add("messageOrderCheckoutLogin", (boolean) => {
+Cypress.Commands.add("messageCheckoutLogin", (boolean) => {
   const continueOrder = boolean;
   cy.get('[id="checkoutModal"]').contains("Checkout").should("be.visible");
   if (continueOrder) {
@@ -16,7 +14,7 @@ Cypress.Commands.add("messageOrderCheckoutLogin", (boolean) => {
   }
 });
 
-Cypress.Commands.add("verifyUserBillingAddressCheckoutPage", (
+Cypress.Commands.add("verifyUserBillingAddressOnCheckoutPage", (
   name,
   lastName,
   company,
@@ -49,7 +47,7 @@ Cypress.Commands.add("verifyUserBillingAddressCheckoutPage", (
   });
 })
 
-Cypress.Commands.add("verifyUserDeliveryAddressCheckoutPage",
+Cypress.Commands.add("verifyUserDeliveryAddressOnCheckoutPage",
   (
     name,
     lastName,
@@ -84,7 +82,7 @@ Cypress.Commands.add("verifyUserDeliveryAddressCheckoutPage",
   }
 );
 
-Cypress.Commands.add("verifyItemFromCheckoutPage", () => {
+Cypress.Commands.add("verifyItemsOnCheckoutPage", () => {
   cy.get('[id="cart_info"]')
     .should("be.visible")
     .find("tbody")
@@ -110,15 +108,15 @@ Cypress.Commands.add("verifyItemFromCheckoutPage", () => {
     });
 });
 
-Cypress.Commands.add('sendCommentInCheckoutPage', (text) => {
+Cypress.Commands.add('addCommentToCheckoutPage', (text) => {
   cy.get('.form-control').type(text)
 })
 
-Cypress.Commands.add('placeOrderButton', () => {
+Cypress.Commands.add('clickPlaceOrder', () => {
   cy.contains('Place Order').click()
 })
 
-Cypress.Commands.add('downloadInvoice', (request) => {
+Cypress.Commands.add('verifyDownloadedInvoice', (request) => {
   cy.contains(`Download Invoice`).click()
   cy.wait(`@${request}`)
 })

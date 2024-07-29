@@ -11,12 +11,12 @@ describe("Cart", () => {
   beforeEach(() => {
     randomPerson = generatePerson();
   });
-  it("Should send a subscription in the cart page", () => {
+  it("Should Send a Subscription on the Cart Page", () => {
     cy.navigateToPage(pages.cartPage.name, pages.cartPage.pageLoadSelector);
     cy.subscribeToNewsletterOnCartPage(randomPerson.email);
   });
 
-  it("Should add two products in cart", () => {
+  it("Should Add Two Products to the Cart", () => {
     const indexFirstProduct = 0;
     var continueShopping = true;
     const indexSecondProduct = 1;
@@ -25,14 +25,14 @@ describe("Cart", () => {
       pages.productsPage.name,
       pages.productsPage.pageLoadSelector
     );
-    cy.addProductInCart(indexFirstProduct);
-    cy.messageProductAddedToCart(continueShopping);
-    cy.addProductInCart(indexSecondProduct);
-    cy.messageProductAddedToCart((continueShopping = false));
+    cy.addProductToCart(indexFirstProduct);
+    cy.verifyProductAddedToCartMessage(continueShopping);
+    cy.addProductToCart(indexSecondProduct);
+    cy.verifyProductAddedToCartMessage((continueShopping = false));
     cy.verifyItemsInCart();
   });
 
-  it("Should verify product quantity in cart", () => {
+  it("Should Verify Product Quantity in the Cart", () => {
     const indexProduct = 0;
     const quantityProduct = 4;
     const continueShopping = false;
@@ -42,13 +42,13 @@ describe("Cart", () => {
       pages.productsPage.pageLoadSelector
     );
     cy.viewProductByIndex(indexProduct);
-    cy.addQuantityProductInDetailProductPage(quantityProduct);
-    cy.addToCartInDetailProductPage();
-    cy.messageProductAddedToCart(continueShopping);
-    cy.verifyQuantitySameProductInCartPage(quantityProduct);
+    cy.setProductQuantity(quantityProduct);
+    cy.addToCartOnDetailProductPage();
+    cy.verifyProductAddedToCartMessage(continueShopping);
+    cy.verifyProductQuantityInCart(quantityProduct);
   });
 
-  it("Should add a product in cart and remove it", () => {
+  it("Should Add a Product to the Cart and Remove It", () => {
     const indexFirstProduct = 0;
     var continueShopping = false;
 
@@ -56,10 +56,10 @@ describe("Cart", () => {
       pages.productsPage.name,
       pages.productsPage.pageLoadSelector
     );
-    cy.addProductInCart(indexFirstProduct);
-    cy.messageProductAddedToCart(continueShopping);
+    cy.addProductToCart(indexFirstProduct);
+    cy.verifyProductAddedToCartMessage(continueShopping);
     cy.verifyItemsInCart();
-    cy.removeItemInCartPage();
-    cy.verifyIfTheCartIsEmpty();
+    cy.removeItemFromCart();
+    cy.verifyCartIsEmpty();
   });
 });

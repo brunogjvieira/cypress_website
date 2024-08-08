@@ -14,6 +14,9 @@ yarn add --dev cypress
 yarn add --dev typescript @types/cypress
 npm install faker-br --save-dev
 
-Some tests
+Example: Cart Test
 ![cartPage](./assets/to_readme/cartPage.cy.ts-ezgif.com-video-to-gif-converter.gif)
+
+
+Example: Creat Account Test
 ![createAccountPage](./assets/to_readme/createAccountPage.cy.ts-ezgif.com-video-to-gif-converter.gif)

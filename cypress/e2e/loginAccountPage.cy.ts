@@ -15,7 +15,7 @@ describe("login User", () => {
   beforeEach(() => {
     randomPerson = generatePerson();
   });
-  it("Should Login User with Correct Email and Password", () => {
+  it.only("Should Login User with Correct Email and Password", () => {
     cy.navigateToPage(pages.loginPage.name, pages.loginPage.pageLoadSelector);
     cy.fillLoginForm(users.bruno.email, users.bruno.password);
     cy.verifyUserIsLoggedIn(users.bruno.name);

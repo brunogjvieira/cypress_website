@@ -12,9 +12,10 @@
   "devDependencies": {
     "@types/cypress": "^1.1.3",
     "@types/node": "^20.14.12",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "faker-br": "^0.4.1"
+    
   },
   "dependencies": {
-    "faker-br": "^0.4.1"
   }
 }

@@ -9,5 +9,7 @@ export default defineConfig({
     viewportHeight: 1080,
     viewportWidth: 1920,
     chromeWebSecurity: true,
+    video: true,
+    videoCompression: true,
   },
 });
